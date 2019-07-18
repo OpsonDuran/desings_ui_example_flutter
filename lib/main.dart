@@ -1,4 +1,5 @@
 import 'package:desings_ui_example_flutter/src/views/basic_view.dart';
+import 'package:desings_ui_example_flutter/src/views/scrolling_view.dart';
 import 'package:flutter/material.dart';
  
 void main() => runApp(MyApp());
@@ -9,9 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'UI Desings Examples App',
-      initialRoute: 'basic',
+      initialRoute: 'scrolling',
       routes: {
         'basic' : (BuildContext context) => BasicView(),
+        'scrolling':(BuildContext context)=> ScrollingView(),
       },
     );
   }
