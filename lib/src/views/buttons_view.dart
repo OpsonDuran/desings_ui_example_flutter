@@ -1,7 +1,8 @@
 import 'dart:math';
+import 'dart:ui' as prefix0;
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ButtonsView extends StatelessWidget {
   @override
@@ -20,6 +21,7 @@ class ButtonsView extends StatelessWidget {
               child: Column(
             children: <Widget>[
               _titles(),
+              _buttonsCustom(),
             ],
           ))
         ],
@@ -92,22 +94,74 @@ class ButtonsView extends StatelessWidget {
     );
   }
 
-
-  Widget _bottonNavigationBar(BuildContext context){
+  Widget _bottonNavigationBar(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
-        primaryColor: Colors.pinkAccent,
-        textTheme: Theme.of(context).textTheme.copyWith(
-          caption:TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0) ) 
-        )
-      ),
-      child: BottomNavigationBar(
-        items:[
-          BottomNavigationBarItem(icon: Icon(Icons.home,size: 30.0,),title: Container()),
-          BottomNavigationBarItem(icon: Icon(Icons.bubble_chart,size: 30.0),title: Container()),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_today,size: 30.0),title: Container()),
-        ]
+          canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
+          primaryColor: Colors.pinkAccent,
+          textTheme: Theme.of(context).textTheme.copyWith(
+              caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))),
+      child: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              size: 30.0,
+            ),
+            title: Container()),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.bubble_chart, size: 30.0), title: Container()),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today, size: 30.0), title: Container()),
+      ]),
+    );
+  }
+
+  Widget _buttonsCustom() {
+    return Table(
+      children: [
+        TableRow(children: [
+          _createButtonCustom(Colors.brown,Icons.access_time,'Time'),
+          _createButtonCustom(Colors.cyanAccent,Icons.pages,'Pages'),
+        ]),
+        TableRow(children: [
+          _createButtonCustom(Colors.amber,Icons.accessible,'Accessible'),
+          _createButtonCustom(Colors.blue,Icons.account_circle, 'Account'),
+        ]),
+        TableRow(children: [
+          _createButtonCustom(Colors.pink,Icons.palette,'Palette'),
+          _createButtonCustom(Colors.orange,Icons.offline_bolt,'Bolt'),
+        ]),
+        TableRow(children: [
+          _createButtonCustom(Colors.purple,Icons.vpn_key,'keys'),
+          _createButtonCustom(Colors.red,Icons.warning,'Warnings'),
+        ])
+      ],
+    );
+  }
+
+  Widget _createButtonCustom(Color color,IconData icon,String text) {
+    return ClipRect(
+          child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5.0,sigmaY: 5.0),
+            child: Container(
+          height: 180.0,
+          margin: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Color.fromRGBO(62, 66, 107, 0.70),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(height: 5.0,),
+            CircleAvatar(
+              backgroundColor: color,
+              radius: 35.0,
+              child: Icon(icon,color: Colors.white,size: 30.0,),),
+              Text(text,style: TextStyle(color: color),),
+              SizedBox(height: 5.0,)
+          ],),
+        ),
       ),
     );
   }
